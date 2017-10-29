@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/default_padding">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/repository_user_view"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/default_avatar_size"
+            android:layout_height="@dimen/default_avatar_size"
+            app:cardCornerRadius="@dimen/cardview_default_radius"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_no_avatar"
+                android:id="@+id/repository_owner_avatar"/>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/repository_user_name_textview"
+            android:lines="1"
+            android:textColor="@color/colorPrimaryFont"
+            android:textSize="12sp"
+            android:text="SSilvaAlexandre" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/repository_full_name_textview"
+            android:lines="1"
+            android:textColor="@color/colorSubTitle"
+            android:textSize="12sp"
+            android:text="Alexandre S Silva" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/repository_user_view"
+        android:layout_toStartOf="@+id/repository_user_view"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:id="@+id/repository_name"
+            android:textColor="@color/colorPrimaryFont"
+            android:textStyle="bold"
+            android:text="Nome Repositório"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:id="@+id/repository_description"
+            android:ellipsize="end"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="13sp"
+            android:text="Descrição do repositório lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_padding"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/repository_fork_number"
+                android:drawableLeft="@drawable/ic_git_fork"
+                android:drawableStart="@drawable/ic_git_fork"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:text="1032"
+                android:lines="1"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
+                android:id="@+id/repository_star_number"
+                android:drawableLeft="@drawable/ic_git_star"
+                android:drawableStart="@drawable/ic_git_star"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:text="1032"
+                android:lines="1"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
