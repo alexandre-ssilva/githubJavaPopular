@@ -1,5 +1,7 @@
 package com.ssilvaalexandre.desafioandroid.NetworkManager;
 
+import java.io.InputStream;
+
 /**
  * Created by ssilvaalexandre on 20/10/17.
  * Nexaas All rights reserved
@@ -7,13 +9,13 @@ package com.ssilvaalexandre.desafioandroid.NetworkManager;
 
 public class NetworkResponse {
     private int statusCode;
-    private String content;
+    private InputStream content;
 
-    public void setContent(String content) {
+    public void setContent(InputStream content) {
         this.content = content;
     }
 
-    public String getContent() {
+    public InputStream getContent() {
         return content;
     }
 

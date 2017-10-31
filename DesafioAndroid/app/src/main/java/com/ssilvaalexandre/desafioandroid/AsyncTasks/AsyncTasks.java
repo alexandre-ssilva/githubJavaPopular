@@ -1,5 +1,6 @@
 package com.ssilvaalexandre.desafioandroid.AsyncTasks;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -12,7 +13,7 @@ import com.ssilvaalexandre.desafioandroid.ObjectManager.RepositoryManager;
  * Nexaaas All rights reserved
  */
 
-public class RepositoryAsyncTasks {
+public class AsyncTasks {
 
     public static class GetGithubJavaRepoAsyncTask extends AsyncTask<Integer, Void, RepositoriesController> {
 
@@ -48,6 +49,27 @@ public class RepositoryAsyncTasks {
                 else
                     listener.onGetRepositoriesFailed(msg);
             }
+        }
+    }
+
+    public static class GetDrawableAsyncTask extends AsyncTask<String, Void, Drawable> {
+
+        private String msg;
+
+        @Override
+        protected Drawable doInBackground(String... strings) {
+            try {
+
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG)
+                    Log.e("GITHUB_JAVA_LANG", Thread.currentThread().getStackTrace()[2].getClassName() +
+                    "#" + Thread.currentThread().getStackTrace()[2].getMethodName() + "error line #" +
+                    Thread.currentThread().getStackTrace()[2].getLineNumber() + ":" +
+                    e.getLocalizedMessage());
+
+                msg = e.getLocalizedMessage();
+            }
+            return null;
         }
     }
 

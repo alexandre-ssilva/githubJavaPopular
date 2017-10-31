@@ -5,6 +5,7 @@ import com.ssilvaalexandre.desafioandroid.Model.RepositoryModel;
 import com.ssilvaalexandre.desafioandroid.Model.UserModel;
 import com.ssilvaalexandre.desafioandroid.NetworkManager.NetworkConnect;
 import com.ssilvaalexandre.desafioandroid.NetworkManager.NetworkResponse;
+import com.ssilvaalexandre.desafioandroid.Util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +36,7 @@ public class RepositoryManager {
         if (response.getStatusCode() != 200)
             throw new Exception("Não foi possível recuperar repositórios");
 
-        JSONObject repositoriesJSON = new JSONObject(response.getContent());
+        JSONObject repositoriesJSON = new JSONObject(Util.convertStreamToString(response.getContent()));
 
 
         RepositoriesController controller = new RepositoriesController();

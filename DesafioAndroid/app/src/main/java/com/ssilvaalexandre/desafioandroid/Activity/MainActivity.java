@@ -9,13 +9,13 @@ import android.widget.Toast;
 
 import com.ssilvaalexandre.desafioandroid.Adapter.OnRecycleItemClickListener;
 import com.ssilvaalexandre.desafioandroid.Adapter.RepositoryAdapter;
-import com.ssilvaalexandre.desafioandroid.AsyncTasks.RepositoryAsyncTasks;
+import com.ssilvaalexandre.desafioandroid.AsyncTasks.AsyncTasks;
 import com.ssilvaalexandre.desafioandroid.Model.RepositoriesController;
 import com.ssilvaalexandre.desafioandroid.R;
 import com.ssilvaalexandre.desafioandroid.Util.DividerItemDecoration;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
-        RepositoryAsyncTasks.OnGetRepoAsyncTaskListener, OnRecycleItemClickListener {
+        AsyncTasks.OnGetRepoAsyncTaskListener, OnRecycleItemClickListener {
 
     private SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void getRepositories () {
-        new RepositoryAsyncTasks.GetGithubJavaRepoAsyncTask(this).execute(++page);
+        new AsyncTasks.GetGithubJavaRepoAsyncTask(this).execute(++page);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (repositoriesController != null)
             repositoriesController.clearRepositories();
 
-        new RepositoryAsyncTasks.GetGithubJavaRepoAsyncTask(this).execute(++page);
+        new AsyncTasks.GetGithubJavaRepoAsyncTask(this).execute(++page);
     }
 
     @Override
