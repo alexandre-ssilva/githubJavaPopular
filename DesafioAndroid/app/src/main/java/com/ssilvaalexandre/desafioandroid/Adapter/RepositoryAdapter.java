@@ -2,6 +2,7 @@ package com.ssilvaalexandre.desafioandroid.Adapter;
 
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,10 +30,52 @@ public class RepositoryAdapter extends RecyclerView.Adapter <RecyclerView.ViewHo
 
     private ArrayList<RepositoryModel> repos;
     private OnRecycleItemClickListener listener;
+    private int lastVisibleItem, totalItemCount, visibleThreshold = 2;
+    private boolean loading = false;
+    private OnLoadingListener loadingListener;
 
-    public RepositoryAdapter (ArrayList<RepositoryModel> repos, OnRecycleItemClickListener listener) {
+    public RepositoryAdapter (final ArrayList<RepositoryModel> repos, OnRecycleItemClickListener listener, RecyclerView recyclerView) {
         this.repos = repos;
         this.listener = listener;
+
+        if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
+
+            final LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    totalItemCount = layoutManager.getItemCount();
+                    lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+
+                    if (!loading && totalItemCount > 0 && totalItemCount <= (lastVisibleItem + visibleThreshold)
+                            && repos.get(repos.size() - 1) != null) {
+
+                        if (loadingListener != null)
+                            loadingListener.performLoad();
+                    }
+                }
+            });
+        }
+    }
+
+    public void setLoadingListener(OnLoadingListener loadingListener) {
+        this.loadingListener = loadingListener;
+    }
+
+    public void setLoading (boolean loading) {
+        this.loading = loading;
+
+        if (loading)
+            repos.add(null);
+
+        else if (repos !=null && repos.get(repos.size() - 1) == null)
+            repos.remove(repos.size() - 1);
+
+     notifyItemChanged(repos.size() - 1);
     }
 
     @Override
@@ -138,5 +181,9 @@ public class RepositoryAdapter extends RecyclerView.Adapter <RecyclerView.ViewHo
             if (drawable != null)
                 holder.ownerAvatar.setImageDrawable(drawable);
         }
+    }
+
+    public interface OnLoadingListener {
+        void performLoad();
     }
 }

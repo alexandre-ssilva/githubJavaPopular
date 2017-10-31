@@ -15,7 +15,7 @@ import com.ssilvaalexandre.desafioandroid.R;
 import com.ssilvaalexandre.desafioandroid.Util.DividerItemDecoration;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
-        AsyncTasks.OnGetRepoAsyncTaskListener, OnRecycleItemClickListener {
+        AsyncTasks.OnGetRepoAsyncTaskListener, OnRecycleItemClickListener, RepositoryAdapter.OnLoadingListener {
 
     private SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
@@ -72,20 +72,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void onGetRepositories(RepositoriesController controller) {
+
         if (swipe.isRefreshing())
             swipe.setRefreshing(false);
 
         if (repositoriesController == null) {
-            repositoriesController = controller;
-            adapter = new RepositoryAdapter(repositoriesController.getRepos(), this);
-            recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            repositoriesController = controller;
+            adapter = new RepositoryAdapter(repositoriesController.getRepos(), this, recyclerView);
+            adapter.setLoadingListener(this);
+            recyclerView.setAdapter(adapter);
 
             DividerItemDecoration decor = new DividerItemDecoration(getResources().getDrawable(R.drawable.divider_item), true, true);
             decor.setSize(getResources().getDimensionPixelSize(R.dimen.item_separator));
 
             recyclerView.addItemDecoration(decor);
         } else {
+            adapter.setLoading(false);
+
             repositoriesController.addRepositories(controller.getRepos());
 
             adapter.notifyItemRangeChanged(repositoriesController.getRepos().size()
@@ -95,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void onGetRepositoriesFailed(String msg) {
+        if (adapter != null)
+            adapter.setLoading(false);
         if (swipe.isRefreshing())
             swipe.setRefreshing(false);
 
@@ -104,5 +110,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public void onRecycleItemClick(int position) {
         Toast.makeText(this, repositoriesController.getRepositoryAtIndex(position).getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void performLoad() {
+        adapter.setLoading(true);
+        getRepositories();
     }
 }
