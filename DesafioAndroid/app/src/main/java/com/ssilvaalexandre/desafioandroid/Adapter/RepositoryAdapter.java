@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ssilvaalexandre.desafioandroid.BuildConfig;
 import com.ssilvaalexandre.desafioandroid.Model.RepositoryModel;
 import com.ssilvaalexandre.desafioandroid.ObjectManager.UserManager;
@@ -112,7 +113,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter <RecyclerView.ViewHo
 
     protected class RepositoryViewHolder extends RecyclerView.ViewHolder {
         private TextView repoName, repoDescription, repoForks, repoStars, ownerName, ownerType;
-        private ImageView ownerAvatar;
+        private CircularImageView ownerAvatar;
         private View clickableCell;
 
         RepositoryViewHolder(View v) {

@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/main_recycler"
-            tools:listitem="@layout/repository_cell"/>
+            tools:listitem="@layout/pull_cell"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

@@ -7,7 +7,7 @@
     android:padding="@dimen/default_padding"
     android:clickable="true"
     android:focusable="true"
-    android:background="@android:drawable/list_selector_background">
+    android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,21 +19,13 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="@dimen/default_avatar_size"
-            android:layout_height="@dimen/default_avatar_size"
-            app:cardCornerRadius="@dimen/cardview_default_radius"
-            app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
-
-            <ImageView
-                android:contentDescription="@string/avatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_no_avatar"
-                android:id="@+id/repository_owner_avatar"/>
-
-        </android.support.v7.widget.CardView>
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/repository_owner_avatar"
+            android:src="@drawable/ic_no_avatar"
+            app:civ_shadow="false"
+            app:civ_border="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -70,6 +62,8 @@
             android:id="@+id/repository_name"
             android:textColor="@color/colorPrimaryFont"
             android:textStyle="bold"
+            android:textSize="16sp"
+            android:textAllCaps="true"
             android:text="Nome Repositório"
             android:ellipsize="end"/>
 
