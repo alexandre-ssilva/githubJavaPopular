@@ -85,15 +85,15 @@ public class PullAdapter extends RecyclerView.Adapter <PullAdapter.PullViewHolde
             ownerNameTextView.setText(pull.getOwner().getLoginName());
             ownerTypeTextView.setText(pull.getOwner().getType());
 
-
+            new GetAvatarAsyncTask(this).execute(pull.getOwner().getAvatarUrl());
         }
     }
 
-    protected class GetAvatarAsynctask extends AsyncTask<String, Void, Drawable> {
+    protected static class GetAvatarAsyncTask extends AsyncTask<String, Void, Drawable> {
 
         private PullViewHolder holder;
 
-        GetAvatarAsynctask (PullViewHolder holder) {
+        GetAvatarAsyncTask(PullViewHolder holder) {
             this.holder = holder;
         }
 

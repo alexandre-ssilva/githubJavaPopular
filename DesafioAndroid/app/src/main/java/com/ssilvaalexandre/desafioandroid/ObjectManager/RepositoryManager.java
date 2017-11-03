@@ -61,7 +61,7 @@ public class RepositoryManager {
             repo.setDescription(item.getString("description"));
             repo.setForksNumber(item.getInt("forks_count"));
             repo.setStarsNumber(item.getInt("stargazers_count"));
-            repo.setPullsUrl(item.getString("pulls_url"));
+            repo.setSelfUrl(item.getString("url"));
 
             UserModel owner = new UserModel();
 

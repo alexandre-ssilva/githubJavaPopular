@@ -8,7 +8,7 @@ package com.ssilvaalexandre.desafioandroid.Model;
 public class PullRequestModel {
     private int id;
     private UserModel owner;
-    private String pullName, pullBody;
+    private String pullName, pullBody, selfUrl;
 
     public void setId(int id) {
         this.id = id;
@@ -40,5 +40,13 @@ public class PullRequestModel {
 
     public String getPullBody() {
         return pullBody;
+    }
+
+    public void setSelfUrl(String selfUrl) {
+        this.selfUrl = selfUrl;
+    }
+
+    public String getSelfUrl() {
+        return selfUrl;
     }
 }

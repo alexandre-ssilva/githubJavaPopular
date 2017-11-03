@@ -1,5 +1,6 @@
 package com.ssilvaalexandre.desafioandroid.Activity;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import com.ssilvaalexandre.desafioandroid.Adapter.OnRecycleItemClickListener;
 import com.ssilvaalexandre.desafioandroid.Adapter.RepositoryAdapter;
 import com.ssilvaalexandre.desafioandroid.AsyncTasks.AsyncTasks;
 import com.ssilvaalexandre.desafioandroid.Model.RepositoriesController;
+import com.ssilvaalexandre.desafioandroid.Model.RepositoryModel;
 import com.ssilvaalexandre.desafioandroid.R;
 import com.ssilvaalexandre.desafioandroid.Util.DividerItemDecoration;
 
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onGetRepositoriesFailed(String msg) {
         if (adapter != null)
             adapter.setLoading(false);
+
         if (swipe.isRefreshing())
             swipe.setRefreshing(false);
 
@@ -109,7 +112,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void onRecycleItemClick(int position) {
-        Toast.makeText(this, repositoriesController.getRepositoryAtIndex(position).getName(), Toast.LENGTH_SHORT).show();
+        RepositoryModel repo = repositoriesController.getRepositoryAtIndex(position);
+
+        Bundle extras = new Bundle();
+        extras.putString("repository", repo.getFullName());
+        extras.putString("pulls", repo.getSelfUrl());
+
+        Intent intent = new Intent(this, PullActivity.class);
+        intent.putExtras(extras);
+
+        startActivity(intent);
     }
 
     @Override

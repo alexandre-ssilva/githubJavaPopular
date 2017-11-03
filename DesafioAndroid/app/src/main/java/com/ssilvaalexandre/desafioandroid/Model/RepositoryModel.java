@@ -7,7 +7,7 @@ package com.ssilvaalexandre.desafioandroid.Model;
 
 public class RepositoryModel {
 
-    private String name, description, userName, fullName, pullsUrl;
+    private String name, description, userName, fullName, selfUrl;
     private int forksNumber, starsNumber, id;
     private UserModel owner;
 
@@ -59,12 +59,12 @@ public class RepositoryModel {
         return starsNumber;
     }
 
-    public void setPullsUrl(String pullsUrl) {
-        this.pullsUrl = pullsUrl;
+    public void setSelfUrl(String pullsUrl) {
+        this.selfUrl = pullsUrl;
     }
 
-    public String getPullsUrl() {
-        return pullsUrl;
+    public String getSelfUrl() {
+        return selfUrl;
     }
 
     public void setId(int id) {

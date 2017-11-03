@@ -17,10 +17,11 @@ import java.util.ArrayList;
  */
 
 public class PullManager {
+    private static final String PULLS = "/pulls";
 
     public static ArrayList<PullRequestModel> getPulls (String url) throws Exception {
 
-        NetworkResponse response = NetworkConnect.connect(url);
+        NetworkResponse response = NetworkConnect.connect(url + PULLS);
 
         if (response == null)
             throw new Exception("Não foi possível conectar ao servidor. Tente novamente mais tarde.");
@@ -37,13 +38,14 @@ public class PullManager {
 
         ArrayList<PullRequestModel> pulls = new ArrayList<>();
 
-        for (int i = 0; i < pulls.size(); i++) {
+        for (int i = 0; i < jsonArray.length(); i++) {
             PullRequestModel pull = new PullRequestModel();
             JSONObject pullJSON = jsonArray.getJSONObject(i);
 
             pull.setId(pullJSON.getInt("id"));
             pull.setPullBody(pullJSON.getString("body"));
             pull.setPullName(pullJSON.getString("title"));
+            pull.setSelfUrl(pullJSON.getString("html_url"));
 
             UserModel owner = new UserModel();
 
