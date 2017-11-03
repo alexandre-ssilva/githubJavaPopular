@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.PullActivity"></activity>
+        <activity android:name=".Activity.PullActivity" />
+        <activity android:name=".Activity.PullRequestBrowser"></activity>
     </application>
 
 </manifest>

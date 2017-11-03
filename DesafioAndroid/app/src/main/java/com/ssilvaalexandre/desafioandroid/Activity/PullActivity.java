@@ -1,7 +1,6 @@
 package com.ssilvaalexandre.desafioandroid.Activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -105,8 +104,14 @@ public class PullActivity extends AppCompatActivity implements
 
     @Override
     public void onRecycleItemClick(int position) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(pulls.get(position).getSelfUrl()));
-        startActivity(intent);
+        Intent webView = new Intent(this, PullRequestBrowser.class);
+        Bundle extras = new Bundle();
+
+        extras.putString("pull", pulls.get(position).getPullName());
+        extras.putString("url", pulls.get(position).getSelfUrl());
+
+        webView.putExtras(extras);
+        startActivity(webView);
     }
 
     @Override
